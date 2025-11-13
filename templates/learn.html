@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Center – FakeShield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ FakeShield</h1>
+            <p class="subtitle">Learning Center</p>
+        </header>
+
+        <main>
+            <div class="learn-intro">
+                <p>Learn how to identify and protect yourself from scam messages</p>
+            </div>
+
+            <div class="card learn-card">
+                <div class="learn-icon">🚨</div>
+                <h3>Common Scam Patterns</h3>
+                <ul class="learn-list">
+                    <li><strong>Fake Prizes:</strong> Messages claiming you've won a lottery, prize, or inheritance you never entered</li>
+                    <li><strong>Account Verification:</strong> Requests to verify your bank account or personal information urgently</li>
+                    <li><strong>Too Good to Be True:</strong> Offers promising quick money, free expensive items, or unrealistic returns</li>
+                    <li><strong>Impersonation:</strong> Messages pretending to be from banks, government agencies, or trusted companies</li>
+                    <li><strong>Phishing Links:</strong> Messages with suspicious links asking you to click immediately</li>
+                </ul>
+            </div>
+
+            <div class="card learn-card">
+                <div class="learn-icon">🔍</div>
+                <h3>Spotting Red Flags</h3>
+                <ul class="learn-list">
+                    <li><strong>Urgency:</strong> Messages creating panic or demanding immediate action</li>
+                    <li><strong>Suspicious Language:</strong> Poor grammar, spelling mistakes, or unusual phrasing</li>
+                    <li><strong>Unknown Sender:</strong> Messages from numbers or emails you don't recognize</li>
+                    <li><strong>Request for Money:</strong> Any request to send money, gift cards, or payment details</li>
+                    <li><strong>Personal Information:</strong> Asking for passwords, PINs, OTPs, or account details</li>
+                    <li><strong>Threatening Tone:</strong> Messages threatening legal action, account closure, or penalties</li>
+                </ul>
+            </div>
+
+            <div class="card learn-card">
+                <div class="learn-icon">🔒</div>
+                <h3>Essential Safety Tips</h3>
+                <ul class="learn-list">
+                    <li><strong>Verify First:</strong> Always verify messages by contacting the company directly through official channels</li>
+                    <li><strong>Never Share Sensitive Info:</strong> Don't share passwords, OTPs, or bank details via message or call</li>
+                    <li><strong>Be Skeptical:</strong> If something seems too good to be true, it probably is</li>
+                    <li><strong>Don't Click Suspicious Links:</strong> Avoid clicking links from unknown sources</li>
+                    <li><strong>Report Scams:</strong> Report suspicious messages to authorities and your service provider</li>
+                    <li><strong>Use Two-Factor Authentication:</strong> Enable 2FA on all important accounts for added security</li>
+                    <li><strong>Trust Your Instincts:</strong> If a message feels wrong, it probably is. Delete and block the sender</li>
+                </ul>
+            </div>
+
+            <div class="cta-section">
+                <p class="cta-text">Have a suspicious message? Check it now!</p>
+                <a href="/" class="btn btn-primary btn-large">Check Message</a>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="/" class="nav-item">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Check</span>
+            </a>
+            <a href="/result" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Result</span>
+            </a>
+            <a href="/learn" class="nav-item active">
+                <span class="nav-icon">📚</span>
+                <span class="nav-label">Learn</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>

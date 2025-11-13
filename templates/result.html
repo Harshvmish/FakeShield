@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Result – FakeShield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ FakeShield</h1>
+            <p class="subtitle">Detection Result</p>
+        </header>
+
+        <main>
+            <div class="card result-card {% if prediction == 'Likely Scam' %}scam{% else %}safe{% endif %}">
+                <div class="result-icon">
+                    {% if prediction == 'Likely Scam' %}
+                        ⚠️
+                    {% else %}
+                        ✅
+                    {% endif %}
+                </div>
+                
+                <h2 class="result-title">{{ prediction }}</h2>
+                
+                <div class="confidence-meter">
+                    <div class="confidence-label">Confidence Level</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: {{ confidence }}%"></div>
+                    </div>
+                    <div class="confidence-value">{{ confidence }}%</div>
+                </div>
+
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Detected Language:</span>
+                        <span class="detail-value">{{ language }}</span>
+                    </div>
+                </div>
+
+                <div class="reasons-section">
+                    <h3>Analysis Reasons:</h3>
+                    <ul class="reasons-list">
+                        {% for reason in reasons %}
+                            <li>{{ reason }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% if message %}
+                <div class="message-preview">
+                    <h4>Analyzed Message:</h4>
+                    <p class="message-text">{{ message }}</p>
+                </div>
+                {% endif %}
+
+                <div class="action-buttons">
+                    <a href="/" class="btn btn-primary">Check Another Message</a>
+                    <a href="/learn" class="btn btn-secondary">Learn About Scams</a>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="/" class="nav-item">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Check</span>
+            </a>
+            <a href="/result" class="nav-item active">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Result</span>
+            </a>
+            <a href="/learn" class="nav-item">
+                <span class="nav-icon">📚</span>
+                <span class="nav-label">Learn</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>

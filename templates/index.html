@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeShield – Scam Message Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ FakeShield</h1>
+            <p class="subtitle">Scam Message Detector</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Check Your Message</h2>
+                <p class="info-text">Enter a message in English, Hindi, or Hinglish to check if it's a scam</p>
+                
+                <textarea id="messageInput" placeholder="Paste or type your message here..." rows="6"></textarea>
+                
+                <div class="language-display" id="languageDisplay">
+                    <span class="language-label">Detected Language:</span>
+                    <span class="language-value" id="languageValue">Not detected yet</span>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="detectLanguage()">Detect Language</button>
+                    <button class="btn btn-primary" onclick="checkMessage()">Check for Scam</button>
+                </div>
+
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing message...</p>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="/" class="nav-item active">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Check</span>
+            </a>
+            <a href="/result" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Result</span>
+            </a>
+            <a href="/learn" class="nav-item">
+                <span class="nav-icon">📚</span>
+                <span class="nav-label">Learn</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        function detectLanguage() {
+            const message = document.getElementById('messageInput').value.trim();
+            
+            if (!message) {
+                alert('Please enter a message first');
+                return;
+            }
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    document.getElementById('languageValue').textContent = data.language;
+                    document.getElementById('languageDisplay').classList.add('show');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to detect language. Please try again.');
+            });
+        }
+
+        function checkMessage() {
+            const message = document.getElementById('messageInput').value.trim();
+            
+            if (!message) {
+                alert('Please enter a message to check');
+                return;
+            }
+
+            document.getElementById('loading').classList.remove('hidden');
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    document.getElementById('loading').classList.add('hidden');
+                } else {
+                    window.location.href = '/result';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to analyze message. Please try again.');
+                document.getElementById('loading').classList.add('hidden');
+            });
+        }
+
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                checkMessage();
+            }
+        });
+    </script>
+</body>
+</html>
